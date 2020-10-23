@@ -31,6 +31,8 @@ dependencies:
   flutter_session: ^0.1.1
   shared_preferences:
   fluttertoast:
+  image_picker: ^0.6.7+12
+  image_cropper: ^1.3.1
 
 
   # The following adds the Cupertino Icons font to your application.

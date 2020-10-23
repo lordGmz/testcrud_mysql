@@ -102,8 +102,8 @@ class _OurHomePageState extends State<OurHomePage> {
                       padding: EdgeInsets.all(10.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                        child: Image.asset("assets/avatar.jpg",
-                            height: 75, width: 75),
+                        child: data.length>0  && data[0]["imageUrl"]!="vide" ? Image.network("http://192.168.1.69/profile_photos/"+data[0]["imageUrl"],
+                            height: 75, width: 75) : Image.asset("assets/avatar.jpg", height: 75, width: 75,),
                       ),
                     ),
                     Text(

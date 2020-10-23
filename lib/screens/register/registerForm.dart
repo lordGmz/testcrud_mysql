@@ -194,7 +194,7 @@ class _OurRegisterFormState extends State<OurRegisterForm> {
                       prenom: _prenomController.text,
                       password: _passwordController.text,
                       role: "client",
-                      imageUrl: "YO",
+                      imageUrl: "vide",
                     );
                     addUsers(users);
                   }
