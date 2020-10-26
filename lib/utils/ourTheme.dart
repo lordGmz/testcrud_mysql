@@ -8,6 +8,7 @@ class OurTheme {
       accentColor: Colors.grey[500],
       secondaryHeaderColor: Colors.grey[600],
       hintColor: Colors.grey[500],
+
       //theme des textFields
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(

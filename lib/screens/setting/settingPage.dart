@@ -19,6 +19,10 @@ class _OurSettingPageState extends State<OurSettingPage> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_rounded),
+            onPressed: () => Navigator.pop(context, true),
+          ),
           backgroundColor: Colors.transparent,
           title: Text(
             "Paramètres du compte",
@@ -63,17 +67,11 @@ class _OurSettingPageState extends State<OurSettingPage> {
                   ],
                 ),
               ),
-              onTap: () async {
-                bool res = await Navigator.push(
+              onTap: () {
+                Navigator.push(
                     context,
                     // Create the SelectionScreen in the next step.
                     MaterialPageRoute(builder: (context) => UpdateUserNames()));
-                if (res != null && res == true) {
-                  Flushbar(
-                    message: "Votre profil a été mis à jour.",
-                    duration: Duration(seconds: 3),
-                  )..show(context);
-                }
               },
             ),
             ListTile(
@@ -102,27 +100,12 @@ class _OurSettingPageState extends State<OurSettingPage> {
                       )
                     ],
                   )),
-              onTap: () async {
-                bool res = await Navigator.push(
+              onTap: () {
+                 Navigator.push(
                     context,
                     new MaterialPageRoute(
                         builder: (BuildContext context) =>
                             new UpdatePassword()));
-                if (res != null && res == true) {
-                  Flushbar(
-                    icon: Icon(
-                      Icons.verified_outlined,
-                      size: 28.0,
-                      color: Colors.green[300],
-                    ),
-                    margin: EdgeInsets.all(8),
-                    isDismissible: true,
-                    borderRadius: 8,
-                    title: "Succès",
-                    message: "Votre mot de passe a été mis à jour.",
-                    duration: Duration(seconds: 3),
-                  )..show(context);
-                }
               },
             ),
             ListTile(

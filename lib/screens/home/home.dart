@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testcrud_mysql/screens/category/category.dart';
 import 'package:testcrud_mysql/screens/login/loginPage.dart';
 import 'package:testcrud_mysql/screens/setting/settingPage.dart';
 import 'package:http/http.dart' as http;
@@ -16,14 +17,18 @@ class _OurHomePageState extends State<OurHomePage> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   List data = [];
 
-  Future getEmail() async {
+  /*Future getEmail() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       email = preferences.getString('email');
     });
-  }
+  }*/
 
   Future<List> fetchData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      email = preferences.getString('email');
+    });
     final response = await http.get('http://192.168.1.69/getuser.php?email='+email);
     if (response.statusCode == 200) {
       setState(() {
@@ -60,15 +65,13 @@ class _OurHomePageState extends State<OurHomePage> {
   @override
   void initState() {
     // TODO: implement initState
-
     super.initState();
-    getEmail();
+    fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawerEdgeDragWidth: 0.0,
       key: _drawerKey,
       appBar: AppBar(
         title: Text("Accueil"),
@@ -130,9 +133,9 @@ class _OurHomePageState extends State<OurHomePage> {
               height: 0.50,
             ),
             new ListTile(
-              title: new Text('Paramètres'),
+              title: new Text('Mes catégories'),
               trailing: Icon(
-                Icons.settings,
+                Icons.category_outlined,
                 color: Colors.green,
               ),
               //en appuyant sur notes on iras sur sa page
@@ -141,7 +144,31 @@ class _OurHomePageState extends State<OurHomePage> {
                     context,
                     new MaterialPageRoute(
                         builder: (BuildContext context) =>
+                        new OurCategory()));
+              },
+            ),
+            new Divider(
+              color: Colors.black45,
+              height: 0.50,
+            ),
+            new ListTile(
+              title: new Text('Paramètres'),
+              trailing: Icon(
+                Icons.settings,
+                color: Colors.green,
+              ),
+              //en appuyant sur notes on iras sur sa page
+              onTap: () async {
+                bool res = await Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) =>
                             new OurSettingPage()));
+                if(res != null && res == true){
+                    setState(() {
+                      fetchData();
+                    });
+                }
               },
             ),
             new Divider(

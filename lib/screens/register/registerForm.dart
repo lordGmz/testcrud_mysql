@@ -203,7 +203,6 @@ class _OurRegisterFormState extends State<OurRegisterForm> {
                     );
                     setState(() {
                       sendMail(accout_token, _emailController.text);
-
                     });
                     addUsers(users);
                   }

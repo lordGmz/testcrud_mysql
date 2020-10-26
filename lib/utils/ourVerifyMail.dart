@@ -18,15 +18,12 @@ sendMail( String account_token, String email ) async {
   final message = Message()
     ..from = Address(username)
     ..recipients.add(email) //recipient email
-  //..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com']) //cc Recipents emails
-  //..bccRecipients.add(Address('bccAddress@example.com')) //bcc Recipents emails
     ..subject =
         'Flutter Send Mail from lordgmz : ${DateTime.now()}' //subject of the email
   //..text =
   //'This is the plain text.\nThis is line 2 of the text part.'
     ..html =
         "<h3>Thanks for connecting with us!</h3>\n<p>Verify your account by clicking here : <a href='$url'></a></p>"; //body of the email
-
   try {
     final sendReport = await send(message, smtpServer);
     print('Message sent: ' +

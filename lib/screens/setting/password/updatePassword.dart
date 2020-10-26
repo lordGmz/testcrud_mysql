@@ -44,7 +44,16 @@ class _UpdatePasswordState extends State<UpdatePassword> {
       });
       var data_p = json.decode(res.body).toString().trim();
       if(data_p =="Success"){
-        Navigator.pop(context, true);
+        Fluttertoast.showToast(
+            msg: "Mot de passe mis à jour.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black45,
+            textColor: Colors.white,
+            fontSize: 10.0
+        );
+        Navigator.pop(context);
       }
     } else {
       Fluttertoast.showToast(

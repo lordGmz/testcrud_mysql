@@ -5,7 +5,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OurProfileImage extends StatefulWidget {
@@ -69,40 +68,6 @@ class _OurProfileImageState extends State<OurProfileImage> {
       this.setState(() {
         _inProcess = false;
       });
-    }
-  }
-
-  //function to upload the image
-//  Future uploadImage() async {
-//    final uri = Uri.parse("http://192.168.1.69/uploadImageProfile.php?email="+email); //image link
-//    var request = http.MultipartRequest('POST', uri);
-//    request.fields['name'] = _selectedFile.path;
-//    var pic = await http.MultipartFile.fromPath("image", _selectedFile.path);
-//    request.files.add(pic);
-//    var response = await request.send();
-//    if(response.statusCode== 200){
-
-//    }else{
-//      Fluttertoast.showToast(
-//          msg: "Une erreur s'est produite.",
-//          toastLength: Toast.LENGTH_SHORT,
-//          gravity: ToastGravity.BOTTOM,
-//          timeInSecForIosWeb: 1,
-//          backgroundColor: Colors.red,
-//          textColor: Colors.white,
-//          fontSize: 16.0
-//      );
-//    }
-//  }
-
-  //affiche une image en attendant qu'une autre soit choisie
-  Future test() async{
-    final url = ("http://192.168.1.69/uploadImageProfile.php?email="+email);
-    var res = await http.get(url);
-    if (res.statusCode == 200) {
-      print(res.body);
-    }else{
-      print('Image Not Uploded');
     }
   }
 

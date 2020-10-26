@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 class UsersService {
 
   static const ADD_URL = "http://192.168.1.69/register.php";
-  static const UPDATE_URL = "http://192.168.1.69/update.php";
 
   //fonction d'ajout utilisateur
   Future<String> addUser(Users users) async {

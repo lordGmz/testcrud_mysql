@@ -17,6 +17,7 @@ class _UsernamesUpdateState extends State<UsernamesUpdate> {
   TextEditingController _nomController = TextEditingController();
   TextEditingController _prenomController = TextEditingController();
   String email = "";
+  List data = [];
 
   Future getEmail() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -25,11 +26,32 @@ class _UsernamesUpdateState extends State<UsernamesUpdate> {
     });
   }
 
+
+  Future<List> fetchData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      email = preferences.getString('email');
+    });
+    final response = await http.get('http://192.168.1.69/getuser.php?email='+email);
+    if (response.statusCode == 200) {
+      setState(() {
+        data = json.decode(response.body);
+          _nomController.text=data[0]['nom'];
+          _prenomController.text=data[0]['prenom'];
+      });
+      print(data);
+      return data;
+    }else{
+      print("error");
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getEmail();
+    fetchData();
   }
 
   @override
@@ -38,6 +60,7 @@ class _UsernamesUpdateState extends State<UsernamesUpdate> {
     streamListener.cancel();
     super.dispose();
   }
+
 
   Future update() async {
     var url = "http://192.168.1.69/update.php";
@@ -48,7 +71,16 @@ class _UsernamesUpdateState extends State<UsernamesUpdate> {
     });
     var data = json.decode(response.body).toString().trim();
     if (data == "Success") {
-      Navigator.pop(context, true);
+      Navigator.pop(context);
+      Fluttertoast.showToast(
+          msg: "Données mises à jour avec succès.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black45,
+          textColor: Colors.white,
+          fontSize: 10.0
+      );
     } else {
       Fluttertoast.showToast(
           msg: "Une erreur s'est produite.",
