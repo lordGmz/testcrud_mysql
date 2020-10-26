@@ -57,7 +57,6 @@ class _UsernamesUpdateState extends State<UsernamesUpdate> {
   @override
   void dispose() {
     // TODO: implement dispose
-    streamListener.cancel();
     super.dispose();
   }
 
