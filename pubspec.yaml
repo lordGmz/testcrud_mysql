@@ -33,6 +33,7 @@ dependencies:
   fluttertoast:
   image_picker: ^0.6.7+12
   image_cropper: ^1.3.1
+  mailer:
 
 
   # The following adds the Cupertino Icons font to your application.

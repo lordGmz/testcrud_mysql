@@ -50,7 +50,7 @@ class _OurLoginFormState extends State<OurLoginForm> {
         isDismissible: true,
         borderRadius: 8,
         title: "Oops !",
-        message: "Email ou mot de passe incorrect.",
+        message: "Infos incorrects ou compte non vérifié. Consultez votre boîte mail.",
         duration: Duration(seconds: 5),
       )..show(context);
     }

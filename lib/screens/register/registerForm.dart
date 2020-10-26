@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:testcrud_mysql/models/Users.dart';
 import 'package:testcrud_mysql/services/usersService.dart';
+import 'package:testcrud_mysql/utils/ourRandomString.dart';
+import 'package:testcrud_mysql/utils/ourVerifyMail.dart';
 
 class OurRegisterForm extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _OurRegisterFormState extends State<OurRegisterForm> {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
   var _formKey = GlobalKey<FormState>();
+  var accout_token = getRandomString(15);
 
 
   //ajout
@@ -195,7 +198,13 @@ class _OurRegisterFormState extends State<OurRegisterForm> {
                       password: _passwordController.text,
                       role: "client",
                       imageUrl: "vide",
+                      account_token: accout_token,
+                      account_state: "0",
                     );
+                    setState(() {
+                      sendMail(accout_token, _emailController.text);
+
+                    });
                     addUsers(users);
                   }
                 }

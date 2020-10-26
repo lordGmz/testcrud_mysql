@@ -6,6 +6,8 @@ class Users {
   String imageUrl;
   String password;
   String role;
+  String account_token;
+  String account_state;
 
   Users(
       {this.id,
@@ -14,7 +16,10 @@ class Users {
       this.prenom,
       this.password,
       this.role,
-      this.imageUrl});
+      this.imageUrl,
+      this.account_token,
+      this.account_state,
+      });
 
   factory Users.fromJson(Map<String, dynamic> json) {
     return Users(
@@ -25,6 +30,8 @@ class Users {
       password: json['password'] as String,
       role: json['role'] as String,
       imageUrl: json['imageUrl'] as String,
+      account_token: json['account_token'],
+      account_state: json['account_state'],
     );
   }
 
@@ -36,6 +43,8 @@ class Users {
       "password": password,
       "role": role,
       "imageUrl": imageUrl,
+      "account_token" : account_token,
+      "account_state" : account_state,
     };
   }
 
@@ -48,6 +57,8 @@ class Users {
       "password": password,
       "role": role,
       "imageUrl": imageUrl,
+      "account_token" : account_token,
+      "account_state" : account_state,
     };
   }
 }

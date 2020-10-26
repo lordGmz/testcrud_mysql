@@ -1,6 +1,5 @@
 import 'package:testcrud_mysql/models/Users.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class UsersService {
 
@@ -17,25 +16,5 @@ class UsersService {
       return response.body;
     }
   }
-  Future<String> updateUser(Users users) async {
-    final response = await http.post(UPDATE_URL, body: users.toJsonUpdate());
-    if(response.statusCode == 200){
-      print("response : "+response.body);
-      return response.body;
-    }else{
-      return response.body;
-    }
-  }
-
-  /*Future<String> getUsers (url) async{
-    final response = await http.get(url);
-    if(response.statusCode == 200){
-      print(response.body);
-      return response.body;
-    }else{
-      return "Error";
-    }
-  }*/
-
 
 }
