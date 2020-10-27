@@ -32,19 +32,24 @@ class _DeleteAccountState extends State<DeleteAccount> {
   }
 
   Future deleteAccount() async {
-    var url_login = "http://192.168.1.69/login.php";
-    var url_delete_account = "http://192.168.1.69/deleteUser.php";
-    var response = await http.post(url_login, body: {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    print("cool");
+    var urlLogin = "http://192.168.1.69/login.php";
+    var urlDeleteAccount = "http://192.168.1.69/deleteUser.php";
+    var response = await http.post(urlLogin, body: {
       "email": email,
       "password": _passwordController.text,
     });
+    print("$email");
     var data = json.decode(response.body).toString().trim();
+    print (data);
     if (data == "Success") {
-      var res = await http.post(url_delete_account, body: {
+      var res = await http.post(urlDeleteAccount, body: {
         "email": email,
       });
-      var data_p = json.decode(res.body).toString().trim();
-      if (data_p == "Success") {
+      var dataP = json.decode(res.body).toString().trim();
+      print(dataP);
+      if (dataP == "Success") {
         Fluttertoast.showToast(
             msg: "Votre compte a été supprimé.",
             toastLength: Toast.LENGTH_LONG,
@@ -53,14 +58,24 @@ class _DeleteAccountState extends State<DeleteAccount> {
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 16.0);
+        preferences.remove('email');
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => OurLoginPage()),
             (route) => false);
+      }else{
+        Fluttertoast.showToast(
+            msg: "Une erreur s'est produite.",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
     } else {
       Fluttertoast.showToast(
-          msg: "Une erreur s'est produite.",
+          msg: "Le mot de passe est incorrect.",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -136,12 +151,13 @@ class _DeleteAccountState extends State<DeleteAccount> {
                       ),
                       color: Colors.red,
                       onPressed: () async {
+
                         Alert(
                           context: context,
                           type: AlertType.warning,
                           title: "Supprimer votre compte ?",
                           desc:
-                              "Votre compte sera supprimé, toutes vos données seront effacées. Voulez vous vraiment continuer ?",
+                          "Votre compte sera supprimé, toutes vos données seront effacées. Voulez vous vraiment continuer ?",
                           buttons: [
                             DialogButton(
                               child: Text(

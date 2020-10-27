@@ -25,8 +25,12 @@ class _OurProfileImageState extends State<OurProfileImage> {
     });
   }
 
-  Future getProfile(String m)async{
-    final response = await http.get("http://192.168.1.69/selectProfile.php?email="+m);
+  Future getProfile()async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      email = preferences.getString('email');
+    });
+    final response = await http.get("http://192.168.1.69/selectProfile.php?email="+email);
     if (response.statusCode == 200) {
       setState(() {
         data = json.decode(response.body);
@@ -43,6 +47,7 @@ class _OurProfileImageState extends State<OurProfileImage> {
     this.setState(() {
       _inProcess = true;
     });
+    // ignore: deprecated_member_use
     File image = await ImagePicker.pickImage(source: source);
 
     if (image != null) {
@@ -102,9 +107,9 @@ class _OurProfileImageState extends State<OurProfileImage> {
     // TODO: implement initState
     super.initState();
     getEmail();
+    getProfile();
   }
   Widget getImageWidget() {
-    getProfile(email);
     if (_selectedFile != null) {
       return ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(150.0)),

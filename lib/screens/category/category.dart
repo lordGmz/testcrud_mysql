@@ -20,13 +20,6 @@ class _OurCategoryState extends State<OurCategory> {
 
   String email = "";
 
-  Future getEmail() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      email = preferences.getString('email');
-    });
-  }
-
   Future<List> getAllCategories() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
@@ -149,7 +142,7 @@ class _OurCategoryState extends State<OurCategory> {
                             hintText: "nouvelle catégorie"),
                         validator: (val) {
                           return val.isEmpty
-                              ? "Entez un nom de catégorie"
+                              ? "Entrez un nom de catégorie"
                               : null;
                         },
                       ),
@@ -180,43 +173,43 @@ class _OurCategoryState extends State<OurCategory> {
           ),
           Expanded(
               child: ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                contentPadding: EdgeInsets.all(10.0),
-                title: Text(data[index]['category_name']),
-                trailing: RaisedButton(
-                    elevation: 0.0,
-                    color: Colors.transparent,
-                    child: Icon(Icons.delete_rounded),
-                    onPressed: () {
-                      Alert(
-                        context: context,
-                        type: AlertType.warning,
-                        title: "Supprimer cette catégorie?",
-                        buttons: [
-                          DialogButton(
-                            child: Text(
-                              "Oui",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w800),
-                            ),
-                            onPressed: () {
-                              deleteCat(data[index]['id']);
-                              Navigator.pop(context);
-                            },
-                            width: 120,
-                            color: Colors.red,
-                          )
-                        ],
-                      ).show();
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    contentPadding: EdgeInsets.all(10.0),
+                    title: Text(data[index]['category_name']),
+                    trailing: RaisedButton(
+                        elevation: 0.0,
+                        color: Colors.transparent,
+                        child: Icon(Icons.delete_rounded),
+                        onPressed: () {
+                          Alert(
+                            context: context,
+                            type: AlertType.warning,
+                            title: "Supprimer cette catégorie?",
+                            buttons: [
+                              DialogButton(
+                                child: Text(
+                                  "Oui",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                                onPressed: () {
+                                  deleteCat(data[index]['id']);
+                                  Navigator.pop(context);
+                                },
+                                width: 120,
+                                color: Colors.red,
+                              )
+                            ],
+                          ).show();
 
-                    }),
-              );
-            },
-          ))
+                        }),
+                  );
+                },
+              ))
         ],
       ),
     );

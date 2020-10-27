@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testcrud_mysql/screens/category/category.dart';
 import 'package:testcrud_mysql/screens/login/loginPage.dart';
+import 'package:testcrud_mysql/screens/product/product.dart';
 import 'package:testcrud_mysql/screens/setting/settingPage.dart';
 import 'package:http/http.dart' as http;
 
@@ -145,6 +146,25 @@ class _OurHomePageState extends State<OurHomePage> {
                     new MaterialPageRoute(
                         builder: (BuildContext context) =>
                         new OurCategory()));
+              },
+            ),
+            new Divider(
+              color: Colors.black45,
+              height: 0.50,
+            ),
+            new ListTile(
+              title: new Text('Mes produits'),
+              trailing: Icon(
+                Icons.bar_chart,
+                color: Colors.green,
+              ),
+              //en appuyant sur notes on iras sur sa page
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                        new OurProductPage()));
               },
             ),
             new Divider(
